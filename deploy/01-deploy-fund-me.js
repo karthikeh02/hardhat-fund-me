@@ -2,7 +2,7 @@
 //main function
 //calling of main function
 
-const { network } = require("hardhat")
+const { network, deployments } = require("hardhat")
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
 

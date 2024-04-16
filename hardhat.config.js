@@ -1,10 +1,9 @@
-// require("@nomicfoundation/hardhat-toolbox")
-//require("@nomiclabs/hardhat-etherscan")
+require("@nomiclabs/hardhat-waffle")
 require("hardhat-gas-reporter")
+require("@nomicfoundation/hardhat-verify")
+require("dotenv").config()
 require("solidity-coverage")
 require("hardhat-deploy")
-require("@nomiclabs/hardhat-ethers")
-require("dotenv").config()
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -27,6 +26,12 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             chainId: 11155111,
             blockConfirmations: 6,
+            gas: 6000000,
+        },
+        localhost: {
+            url: "http://127.0.0.1:8545/",
+            chainId: 31337,
+            // gas: 14000000,
         },
     },
     etherscan: {
@@ -34,17 +39,13 @@ module.exports = {
             sepolia: ETHERSCAN_API_KEY,
         },
     },
-    localhost: {
-        url: "http://127.0.0.1:8545/",
-        chainId: 31337,
-    },
     gasReporter: {
         enabled: true,
         outputFile: "gas-report.txt",
         noColors: true,
         currency: "USD",
         coinmarketcap: COINMARKETCAP_API_KEY,
-        token: "MATIC",
+        token: "ETH",
     },
     namedAccounts: {
         deployer: {
@@ -53,5 +54,8 @@ module.exports = {
         user: {
             default: 1,
         },
+    },
+    mocha: {
+        timeout: 500000,
     },
 }
